@@ -28,3 +28,7 @@
 .new-tweet form {
   position: relative;
 }
+
+.new-tweet .overLimit {
+  color: red;
+}
