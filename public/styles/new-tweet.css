@@ -1,12 +1,17 @@
 .new-tweet {
   margin-right: 2em;
   margin-left: 2em;
+  margin-bottom: 2em;
+  border: 1px solid black;
+  padding: 1em;
+  border-radius: 8px;
+  background-color: #ededed;
 
 }
 
 .new-tweet h2 {
-    border-bottom:1px solid #AAA;
-    padding-bottom:3px;
+  border-bottom:1px solid #AAA;
+  padding-bottom:3px;
 }
 
 .new-tweet textarea {

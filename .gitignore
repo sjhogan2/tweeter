@@ -1,2 +1,10 @@
 node_modules/
 .env
+.DS_Store
+public/.DS_Store
+public/images/.DS_Store
+public/images/arrow.png
+public/images/flag.png
+public/images/heart.png
+public/images/raf.png
+public/styles/.DS_Store
