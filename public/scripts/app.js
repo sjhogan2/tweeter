@@ -54,6 +54,8 @@ $(document).ready(function() {
         url: '/tweets/',
         method: 'GET',
         success: function (data) {
+          console.log(data);
+          $(".tweet").remove();
           renderTweets(data);
         }
       });
