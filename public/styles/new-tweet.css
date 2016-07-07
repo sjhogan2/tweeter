@@ -6,7 +6,6 @@
   padding: 1em;
   border-radius: 8px;
   background-color: #ededed;
-
 }
 
 .new-tweet h2 {
@@ -34,6 +33,6 @@
   position: relative;
 }
 
-.new-tweet .overLimit {
+.new-tweet .over-limit {
   color: red;
 }
