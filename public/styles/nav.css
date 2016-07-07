@@ -16,6 +16,10 @@
   padding-right: 10px;
 }
 
+#nav-bar .submitButton {
+  float: right;
+}
+
 #nav-bar .header {
   float: left;
   font-size: 2em;
