@@ -27,11 +27,20 @@ function renderTweets(tweets) {
 
 $(document).ready(function() {
 
-  getAndRenderAllTweets();
+  loadTweets();
 
-  $("form").on( "submit", function(event) {
+  $("form").on("submit", function(event) {
     event.preventDefault();
     var newTweet = ($(this).serialize() );
+    if ($('textarea').val() == "" || null) {
+       alert("Please enter text!");
+       return false;
+     } else if ($('textarea').val().length > 140) {
+       alert("Please keep tweets under 140 characters!");
+       return false;
+     }
+    var $inputText = $("form").find("input[type=text], textarea")
+    $inputText.val("");
     $.ajax({
         url: '/tweets/',
         method: 'POST',
@@ -46,10 +55,11 @@ $(document).ready(function() {
   });
 
   var onTweetSuccess = function(data) {
-    getAndRenderAllTweets();
+    $(data).remove();
+    loadTweets();
   }
 
-  var getAndRenderAllTweets = function() {
+  var loadTweets = function() {
     $.ajax({
         url: '/tweets/',
         method: 'GET',
@@ -57,6 +67,7 @@ $(document).ready(function() {
           console.log(data);
           $(".tweet").remove();
           renderTweets(data);
+
         }
       });
 }
