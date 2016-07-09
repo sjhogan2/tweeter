@@ -2,7 +2,7 @@
   position: fixed;
   background-color: #00a087;
   color: #e8fdff;
-  height: 80px;
+  height: 100px;
   width: 100%;
   padding: 0 2em;
   top: 0;
@@ -14,10 +14,14 @@
   height: 80px;
   float: left;
   padding-right: 10px;
+  padding-top: 15px;
 }
 
 #nav-bar .submitButton {
   float: right;
+  padding-top: 15px;
+  vertical-align: top;
+  cursor: pointer;
 }
 
 #nav-bar .header {

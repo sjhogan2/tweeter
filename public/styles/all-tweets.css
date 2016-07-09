@@ -5,6 +5,10 @@
   border-radius: 8px;
 }
 
+.tweet:hover {
+    opacity: 1;
+}
+
 .tweet header {
   background-color: #EEEEEE;
   border-radius: 7px 7px 0 0;
@@ -16,21 +20,22 @@
   padding: 10px;
 }
 
-.tweet header .handle {
+.tweet .handle {
   float: right;
   padding: 10px;
 }
 
-.tweet header img {
+.tweet .avatar {
   width: 15%;
   border-radius: 7px;
   float: left;
   padding: 5px;
 }
 
-.tweet div {
+.tweet .tweet-body {
   padding: 25px 25px 25px 25px;
   margin: 50px;
+  word-wrap: break-word;
 }
 
 .tweet footer {
@@ -50,9 +55,9 @@
 .tweet:hover footer .button {
     float: right;
     opacity: 1;
+    padding: 1px;
+    color: #00a087;
 }
 
-.tweet:hover {
-    opacity: 1;
-}
+
 

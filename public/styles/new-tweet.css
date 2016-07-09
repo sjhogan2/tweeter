@@ -16,14 +16,18 @@
 .new-tweet textarea {
   padding: 5px;
   width: 100%;
+  border: 1px solid black;
 }
 
 .new-tweet .counter {
   position: absolute;
   right: 0;
   bottom: 0;
+  color: black;
 }
-
+.count-error {
+  color: #CF000F;
+}
 .new-tweet input {
   vertical-align: bottom;
   display: table-cell;
@@ -31,6 +35,10 @@
 
 .new-tweet form {
   position: relative;
+}
+
+.new-tweet .tweet-button {
+  cursor: pointer;
 }
 
 .new-tweet .over-limit {
