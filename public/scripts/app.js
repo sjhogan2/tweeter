@@ -1,3 +1,5 @@
+const tweet_char_limit = 140;
+
 function createTweetElement(tweet) {
   return $(
     `<article class='tweet'>
@@ -6,12 +8,12 @@ function createTweetElement(tweet) {
        <h1>${tweet.user.name}</h1>
        <span class="handle">${tweet.user.handle}</span>
      </header>
-     <div class="tweet-body">${tweet.content.text} </div>
+     <div class="tweet-body">${tweet.content.text}</div>
      <footer>
-       <span> ${tweet.created_at} </span>
-       <a href="#" class="button"> <i class="fa fa-flag" aria-hidden="true"></i> </a>
-       <a href="#" class="button"> <i class="fa fa-retweet" aria-hidden="true"></i> </a>
-       <a href="#" class="button"> <i class="fa fa-heart" aria-hidden="true"></i> </a>
+       <span>${tweet.created_at}</span>
+       <a href="#" class="button"><i class="fa fa-flag" aria-hidden="true"></i></a>
+       <a href="#" class="button"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+       <a href="#" class="button"><i class="fa fa-heart" aria-hidden="true"></i></a>
      </footer>
     </article>`);
 }
@@ -22,51 +24,37 @@ function renderTweets(tweets) {
   });
 }
 
-$(document).ready(function() {
+function resetCounter() {
+  $(".counter").text(tweet_char_limit);
+}
 
-  loadTweets();
+function clearTextarea() {
+  $("form").find("textarea").val("");
+}
 
-   $('textarea').on("click",() => {
-      if ($(".counter").text() === ("Please enter text!")) {
-        $(".counter").text(140);
-        $(".counter").removeClass("count-error");
-      } else if ($(".counter").text() === ("Please enter text!")) {
-        $(".counter").text(140);
-        $(".counter").removeClass("count-error");
-      }
-    });
+function resetComposer() {
+  clearTextarea();
+  resetCounter();
+}
 
-  $("form").on("submit", function(event) {
-    event.preventDefault();
-    let newTweet = ($(this).serialize());
-    if ($('textarea').val() == "" || null) {
-      $(".counter").text("Please enter text!");
-      $(".counter").addClass("count-error");
-      return false;
-     } else if ($('textarea').val().length > 140) {
-      $(".counter").text("Please keep tweets under 140 characters!");
-      $(".counter").addClass("count-error");
-      return false;
-     }
-    let $inputText = $("form").find("input[type=text], textarea")
-    $inputText.val("");
-    $.ajax({
-        url: '/tweets/',
-        method: 'POST',
-        data: newTweet,
-        dataType: "json",
-        success: onTweetSuccess
-      });
-    });
-  });
-
-const onTweetSuccess = function(data) {
-  $(data).remove();
-  $(".counter").text(140);
+function onTweetSuccess(data) {
+  resetComposer();
   loadTweets();
 }
 
-const loadTweets = function() {
+function validate(data) {
+  if ($('textarea').val() === "") {
+      $(".counter").text("Please enter text!");
+      $(".counter").addClass("count-error");
+      return false;
+  } else if ($('textarea').val().length > tweet_char_limit) {
+      $(".counter").text("Please keep tweets under 140 characters!");
+      $(".counter").addClass("count-error");
+      return false;
+  }
+}
+
+function loadTweets() {
   $.ajax({
       url: '/tweets/',
       method: 'GET',
@@ -77,3 +65,20 @@ const loadTweets = function() {
   });
 }
 
+$(document).ready(function() {
+
+  loadTweets();
+
+  $("form").on("submit", function(event) {
+    event.preventDefault();
+    let newTweet = $(this).serialize();
+    validate(newTweet);
+    $.ajax({
+      url: '/tweets/',
+      method: 'POST',
+      data: newTweet,
+      dataType: "json",
+      success: onTweetSuccess
+    });
+  });
+});
